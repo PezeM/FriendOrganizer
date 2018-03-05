@@ -37,7 +37,14 @@
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -105,16 +112,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FriendOrganizer.Model\FriendOrganizer.Model.csproj">
       <Project>{765135cb-92bc-4c23-a3a1-c6895b48776b}</Project>
       <Name>FriendOrganizer.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FriendOrganizerDataAccess\FriendOrganizerDataAccess.csproj">
+    <ProjectReference Include="..\FriendOrganizerDataAccess\FriendOrganizer.DataAccess.csproj">
       <Project>{9ebb34bc-4c88-4ff0-ba6b-44d7bd348b4b}</Project>
-      <Name>FriendOrganizerDataAccess</Name>
+      <Name>FriendOrganizer.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
