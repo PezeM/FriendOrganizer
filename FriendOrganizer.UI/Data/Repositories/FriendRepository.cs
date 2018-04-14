@@ -29,7 +29,11 @@ namespace FriendOrganizer.UI.Data.Repositories
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
 
+        public void Add(Friend friend)
+        {
+            _context.Friends.Add(friend);
         }
     }
 }
