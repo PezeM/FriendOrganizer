@@ -13,10 +13,16 @@ namespace FriendOrganizer.UI.ViewModel
 {
     public class FriendDetailViewModel : ViewModelBase, IFriendDetailViewModel
     {
+        #region Private fields
+
         private IFriendRepository _friendRepository;
         private IEventAggregator _eventAggregator;
         private FriendWrapper _friend;
         private bool _hasChanges;
+
+        #endregion
+
+        #region Public properties
 
         public FriendWrapper Friend
         {
@@ -41,9 +47,15 @@ namespace FriendOrganizer.UI.ViewModel
                 }
             }
         }
+        #endregion
 
+        #region Public commands
 
         public ICommand SaveCommand { get; }
+
+        public ICommand DeleteCommand { get; }
+
+        #endregion
 
         public FriendDetailViewModel(IFriendRepository friendRepository, IEventAggregator eventAggregator)
         {
@@ -51,6 +63,7 @@ namespace FriendOrganizer.UI.ViewModel
             _eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            DeleteCommand = new DelegateCommand(OnDeleteExecute);
         }
 
         public async Task LoadAsync(int? friendId)
@@ -71,6 +84,10 @@ namespace FriendOrganizer.UI.ViewModel
                 }
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+            if (Friend.Id == 0)
+            {
+                Friend.FirstName = "";
+            }
         }
 
         private bool OnSaveCanExecute()
@@ -88,6 +105,12 @@ namespace FriendOrganizer.UI.ViewModel
                 Id = Friend.Id,
                 DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
             });
+        }
+
+        private async void OnDeleteExecute()
+        {
+            _friendRepository.Remove(Friend.Model);
+            await _friendRepository.SaveAsync();
         }
 
         private Friend CreateNewFriend()
