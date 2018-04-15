@@ -39,6 +39,6 @@
                              DataContext="{Binding NavigationViewModel}"/>
         <ContentControl Grid.Column="1" 
                         Grid.Row="1"
-                        Content="{Binding FriendDetailViewModel}"/>
+                        Content="{Binding DetailViewModel}"/>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Content="{Binding DisplayMember}"
-                                Command="{Binding OpenFriendDetailViewCommand}"/>
+                                Command="{Binding OpenDetailViewCommand}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
