@@ -13,6 +13,7 @@ namespace FriendOrganizer.DataAccess
 
         public DbSet<FriendPhoneNumber> FriendPhoneNumbers { get; set; }
 
+        public DbSet<Meeting> Meetings { get; set; }
 
         public FriendOrganizerDbContext() : base("FriendOrganizerDb")
         {
