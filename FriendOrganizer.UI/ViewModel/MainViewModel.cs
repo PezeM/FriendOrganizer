@@ -37,7 +37,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         #region Public commands
 
-        public ICommand CreateNewFriendCommand { get; set; }
+        public ICommand CreateNewDetailCommand { get; set; }
 
         #endregion  
 
@@ -50,9 +50,9 @@ namespace FriendOrganizer.UI.ViewModel
             _messageDialogService = messageDialogService;
 
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
-            _eventAggregator.GetEvent<AfterFriendDeletedEvent>().Subscribe(AfterFriendDeleted);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
 
-            CreateNewFriendCommand = new DelegateCommand(CreateNewFriendExecute);
+            CreateNewDetailCommand = new DelegateCommand<Type>(CreateNewDetailExecute);
 
             NavigationViewModel = navigationViewModel;
         }
@@ -82,14 +82,14 @@ namespace FriendOrganizer.UI.ViewModel
             await DetailViewModel.LoadAsync(args.Id);
         }
 
-        private void AfterFriendDeleted(int friendId)
+        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
             DetailViewModel = null;
         }
 
-        private void CreateNewFriendExecute()
+        private void CreateNewDetailExecute(Type viewModelType)
         {
-            OnOpenDetailView(null);
+            OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name });
         }
     }
 }
