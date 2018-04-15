@@ -220,7 +220,12 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void OnRemovePhoneNumberExecute()
         {
-            throw new NotImplementedException();
+            SelectedPhoneNumber.PropertyChanged -= FriendPhoneNumberWrapper_PropertyChanged;
+            _friendRepository.RemovePhoneNumber(SelectedPhoneNumber.Model);
+            PhoneNumbers.Remove(SelectedPhoneNumber);
+            SelectedPhoneNumber = null;
+            HasChanges = _friendRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private bool OnRemovePhoneNumberCanExecute()
@@ -230,7 +235,11 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void OnAddPhoneNumerExecute()
         {
-            throw new NotImplementedException();
+            var newNumber = new FriendPhoneNumberWrapper(new FriendPhoneNumber());
+            newNumber.PropertyChanged += FriendPhoneNumberWrapper_PropertyChanged;
+            PhoneNumbers.Add(newNumber);
+            Friend.Model.PhoneNumbers.Add(newNumber.Model);
+            newNumber.Number = "";
         }
 
         #endregion

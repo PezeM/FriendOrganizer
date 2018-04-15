@@ -59,7 +59,9 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Phone numbers"
                                         Width="*"
-                                        Binding="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        Binding="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ElementStyle="{StaticResource DataGridColumnStyle}"
+                                        EditingElementStyle="{StaticResource DataGridEditingColumnStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

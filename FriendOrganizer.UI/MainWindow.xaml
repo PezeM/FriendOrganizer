@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="FriendOrganizer" 
         Height="700" 
-        Width="525" 
+        Width="800" 
         FontSize="20"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
