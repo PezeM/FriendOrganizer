@@ -182,7 +182,13 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void OnRemoveFriendExecute()
         {
-            throw new NotImplementedException();
+            var friendToRemove = SelectedAddedFriend;
+
+            Meeting.Model.Friends.Remove(friendToRemove);
+            AddedFriends.Remove(friendToRemove);
+            AvailableFriends.Add(friendToRemove);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private bool OnAddFriendCanExecute()
@@ -192,7 +198,13 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void OnAddFriendExecute()
         {
-            throw new NotImplementedException();
+            var friendToAdd = SelectedAvailableFriend;
+
+            Meeting.Model.Friends.Add(friendToAdd);
+            AddedFriends.Add(friendToAdd);
+            AvailableFriends.Remove(friendToAdd);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         #endregion

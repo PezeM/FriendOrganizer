@@ -57,7 +57,7 @@
                 <Button Content="&lt;&lt;"
                         Margin="10"
                         Command="{Binding AddFriendCommand}"/>
-                <Button Content="&lt;&lt;"
+                <Button Content="&gt;&gt;"
                         Margin="10 0 10 10"
                         Command="{Binding RemoveFriendCommand}"/>
             </StackPanel>
