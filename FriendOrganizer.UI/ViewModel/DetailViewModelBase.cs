@@ -1,10 +1,6 @@
 ﻿using FriendOrganizer.UI.Event;
 using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -14,6 +10,8 @@ namespace FriendOrganizer.UI.ViewModel
     {
         private bool _hasChanges;
         protected readonly IEventAggregator EventAggregator;
+        private int _id;
+        private string _title;
 
         public bool HasChanges
         {
@@ -26,6 +24,22 @@ namespace FriendOrganizer.UI.ViewModel
                     OnPropertyChanged();
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
                 }
+            }
+        }
+
+        public int Id
+        {
+            get { return _id; }
+            protected set { _id = value; }
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            protected set
+            {
+                _title = value;
+                OnPropertyChanged();
             }
         }
 
