@@ -42,7 +42,6 @@ namespace FriendOrganizer.UI.Wrapper
 
         protected override IEnumerable<string> ValidateProperty(string propertyName)
         {
-
             switch (propertyName)
             {
                 case nameof(FirstName):
