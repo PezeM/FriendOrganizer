@@ -6,17 +6,41 @@
              xmlns:local="clr-namespace:FriendOrganizer.UI.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <DataTemplate x:Key="NaviItemTemplate">
+            <Button Content="{Binding DisplayMember}"
+                    Command="{Binding OpenDetailViewCommand}"/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Friends">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Friends}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding DisplayMember}"
-                                Command="{Binding OpenDetailViewCommand}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Friends}"
+                          ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                          ItemTemplate="{StaticResource NaviItemTemplate}"/>
+
+            </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox Header="Meetings" Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Meetings}"
+                          ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                          ItemTemplate="{StaticResource NaviItemTemplate}"/>
+
+            </ScrollViewer>
+        </GroupBox>
+
     </Grid>
 </UserControl>
