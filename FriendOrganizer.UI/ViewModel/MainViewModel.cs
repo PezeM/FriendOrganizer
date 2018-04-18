@@ -105,9 +105,14 @@ namespace FriendOrganizer.UI.ViewModel
             }
         }
 
+        private int nextNewItemId = 0;
         private void CreateNewDetailExecute(Type viewModelType)
         {
-            OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name });
+            OnOpenDetailView(new OpenDetailViewEventArgs
+            {
+                Id = nextNewItemId--,
+                ViewModelName = viewModelType.Name
+            });
         }
     }
 }
