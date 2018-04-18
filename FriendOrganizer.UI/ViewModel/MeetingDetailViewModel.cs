@@ -1,5 +1,6 @@
 ﻿using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data.Repositories;
+using FriendOrganizer.UI.Event;
 using FriendOrganizer.UI.View.Services;
 using FriendOrganizer.UI.Wrapper;
 using Prism.Commands;
@@ -18,7 +19,6 @@ namespace FriendOrganizer.UI.ViewModel
         #region Private fields
 
         private IMeetingRepository _meetingRepository;
-        private IMessageDialogService _messageDialogService;
         private MeetingWrapper _meeting;
         private Friend _selectedAvailableFriend;
         private Friend _selectedAddedFriend;
@@ -75,10 +75,11 @@ namespace FriendOrganizer.UI.ViewModel
         #endregion
 
         public MeetingDetailViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService,
-            IMeetingRepository meetingRepository) : base(eventAggregator)
+            IMeetingRepository meetingRepository) : base(eventAggregator, messageDialogService)
         {
-            _messageDialogService = messageDialogService;
             _meetingRepository = meetingRepository;
+
+            eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(AfterDetailSaved);
 
             AddedFriends = new ObservableCollection<Friend>();
             AvailableFriends = new ObservableCollection<Friend>();
@@ -162,7 +163,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         protected override void OnDeleteExecute()
         {
-            var result = _messageDialogService.ShowOkCancelDialog($"Do you really wan to delete the {Meeting.Title}?", "Meeting");
+            var result = MessageDialogService.ShowOkCancelDialog($"Do you really wan to delete the {Meeting.Title}?", "Meeting");
 
             if (result == MessageDialogResult.OK)
             {
@@ -220,6 +221,16 @@ namespace FriendOrganizer.UI.ViewModel
         }
 
         #endregion
+
+        private async void AfterDetailSaved(AfterDetailSavedEventArgs obj)
+        {
+            if (obj.ViewModelName == nameof(FriendDetailViewModel))
+            {
+                await _meetingRepository.ReloadFriendAsync(obj.Id);
+                _allFriends = await _meetingRepository.GetAllFriendsAsync();
+                SetupPicklist();
+            }
+        }
 
     }
 }
