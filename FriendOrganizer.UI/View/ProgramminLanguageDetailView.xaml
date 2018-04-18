@@ -6,6 +6,29 @@
              xmlns:local="clr-namespace:FriendOrganizer.UI.View"
              mc:Ignorable="d">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid ItemsSource="{Binding ProgrammingLanguages}"
+                  AutoGenerateColumns="False"
+                  RowHeaderWidth="0"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Programming Languages"
+                                    Width="*"
+                                    ElementStyle="{StaticResource DataGridColumnStyle}"
+                                    EditingElementStyle="{StaticResource DataGridEditingColumnStyle}"
+                                    Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Save"
+                    Width="125"
+                    Margin="10"
+                    Command="{Binding SaveCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
