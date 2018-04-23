@@ -76,7 +76,7 @@
 
             <Button Content="Delete" 
                     Width="125" 
-                    Margin="10" 
+                    Margin="10"
                     Command="{Binding DeleteCommand}" />
         </StackPanel>
     </Grid>

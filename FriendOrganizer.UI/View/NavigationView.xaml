@@ -26,8 +26,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Friends}"
-                          ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
-                          ItemTemplate="{StaticResource NaviItemTemplate}"/>
+                              ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                              ItemTemplate="{StaticResource NaviItemTemplate}"/>
 
             </ScrollViewer>
         </GroupBox>
@@ -36,8 +36,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Meetings}"
-                          ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
-                          ItemTemplate="{StaticResource NaviItemTemplate}"/>
+                              ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                              ItemTemplate="{StaticResource NaviItemTemplate}"/>
 
             </ScrollViewer>
         </GroupBox>
